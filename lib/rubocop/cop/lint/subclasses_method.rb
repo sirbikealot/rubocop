@@ -18,14 +18,6 @@ module RuboCop
 
         RESTRICT_ON_SEND = %i[subclasses].freeze
 
-        # @!method deprecate_subclasses_method?(node)
-        def_node_matcher :deprecate_subclasses_method?, <<~PATTERN
-          (send nil? :subclasses)
-        PATTERN
-
-        # By default, this is aliased to `on_csend` as well to handle method calls
-        # with safe navigation, remove the alias if this is unnecessary.
-        # If kept, ensure your tests cover safe navigation as well!
         def on_send(node)
           return unless node.method? :subclasses
 
